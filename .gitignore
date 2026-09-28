@@ -3,3 +3,31 @@ venv/
 faiss_index/
 __pycache__/
 *.pyc
+# Secrets
+*.env
+!.env.example
+
+# Python
+*.py[cod]
+.venv/
+env/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+
+# Runtime data
+storage/
+uploads/
+backend/storage/
+backend/uploads/
+
+# Media — host demos via README drag-and-drop or GitHub Releases, not git
+*.mp4
+*.mov
+*.webm
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

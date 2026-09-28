@@ -1,15 +1,14 @@
 import sys
 from pathlib import Path
 
-from support_core import DATA_DIR, build_vector_db, answer_single
+from support_core import DATA_DIR, answer_single, build_vector_db
 
 
 def load_knowledge_base_file() -> Path:
     default_file = DATA_DIR / "amazon_customer_support.txt"
 
     path_str = input(
-        f"Path to a .txt file of Amazon customer support content "
-        f"[default: {default_file}]: "
+        f"Path to a .txt file of Amazon customer support content [default: {default_file}]: "
     ).strip()
 
     txt_path = Path(path_str) if path_str else default_file

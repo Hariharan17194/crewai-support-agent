@@ -1,0 +1,31 @@
+# Tooling config only — safe to add to any Python repo without changing how it runs.
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-exclude = [".venv", "venv", "storage", "uploads"]
+
+[tool.ruff.lint]
+select = [
+  "E", "W",   # pycodestyle
+  "F",        # pyflakes
+  "I",        # isort
+  "B",        # bugbear
+  "UP",       # pyupgrade
+  "SIM",      # simplify
+  "S",        # bandit security checks
+  "RUF",
+]
+ignore = ["E501"]  # line length is handled by the formatter
+
+[tool.ruff.lint.flake8-bugbear]
+# FastAPI dependency markers are meant to be called in defaults
+extend-immutable-calls = ["fastapi.File", "fastapi.Form", "fastapi.Depends", "fastapi.Query", "fastapi.Body"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S101"]           # assert is fine in tests
+"**/tests/**" = ["S101"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-ra"
