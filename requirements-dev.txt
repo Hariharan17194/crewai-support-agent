@@ -1,4 +1,4 @@
 # Lightweight deps for CI / local tooling. Runtime deps stay in requirements.txt.
-pytest>=8
-pre-commit>=4
-ruff>=0.8
+pytest>=9.1.1
+pre-commit>=4.6.2
+ruff>=0.16.9
