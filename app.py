@@ -1,6 +1,6 @@
 import streamlit as st
 
-from support_core import DATA_DIR, build_vector_db, answer_dual
+from support_core import DATA_DIR, answer_dual, build_vector_db
 
 st.set_page_config(page_title="Multi-Agent Customer Support", page_icon="🤖")
 
@@ -12,9 +12,7 @@ st.caption(
 
 with st.sidebar:
     st.header("Knowledge Base")
-    uploaded_file = st.file_uploader(
-        "Upload a .txt file of customer support content", type=["txt"]
-    )
+    uploaded_file = st.file_uploader("Upload a .txt file of customer support content", type=["txt"])
 
 
 @st.cache_resource(show_spinner="Indexing knowledge base...")

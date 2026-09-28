@@ -1,15 +1,14 @@
 import hashlib
 from pathlib import Path
 
+from crewai import LLM, Agent, Crew, Process, Task
+from crewai.tools import tool
 from dotenv import load_dotenv
 from duckduckgo_search import DDGS
-
-from crewai import Agent, Task, Crew, Process, LLM
-from crewai.tools import tool
 from langchain_community.document_loaders import TextLoader
-from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
+from langchain_openai import OpenAIEmbeddings
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 load_dotenv()
 
@@ -24,7 +23,7 @@ llm = LLM(model="gpt-4o-mini")
 # RAG — build (or load a cached) FAISS index from an uploaded .txt file
 # ---------------------------------------------------------------------------
 def _file_hash(path: Path) -> str:
-    return hashlib.md5(path.read_bytes()).hexdigest()
+    return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 def build_vector_db(txt_path: Path) -> FAISS:
@@ -88,9 +87,7 @@ def web_search_tool(query: str) -> str:
     if not results:
         return "No web results found."
 
-    return "\n\n".join(
-        f"{r['title']}\n{r['body']}\nSource: {r['href']}" for r in results
-    )
+    return "\n\n".join(f"{r['title']}\n{r['body']}\nSource: {r['href']}" for r in results)
 
 
 # ---------------------------------------------------------------------------
